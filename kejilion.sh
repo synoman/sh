@@ -4076,8 +4076,8 @@ yt_menu_pro() {
 				send_stats "正在安装 yt-dlp..."
 				echo "正在安装 yt-dlp..."
 				install ffmpeg
-				sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
-				sudo chmod a+rx /usr/local/bin/yt-dlp
+				curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
+				chmod a+rx /usr/local/bin/yt-dlp
 				local app_no=$sub_choice
 				grep -qxF "${app_no}" /home/docker/appno.txt || echo "${app_no}" >> /home/docker/appno.txt
 				echo "安装完成。按任意键继续..."
@@ -4085,7 +4085,7 @@ yt_menu_pro() {
 			2)
 				send_stats "正在更新 yt-dlp..."
 				echo "正在更新 yt-dlp..."
-				sudo yt-dlp -U
+				yt-dlp -U
 				local app_no=$sub_choice
 				grep -qxF "${app_no}" /home/docker/appno.txt || echo "${app_no}" >> /home/docker/appno.txt
 				echo "更新完成。按任意键继续..."
@@ -4093,7 +4093,7 @@ yt_menu_pro() {
 			3)
 				send_stats "正在卸载 yt-dlp..."
 				echo "正在卸载 yt-dlp..."
-				sudo rm -f /usr/local/bin/yt-dlp
+				rm -f /usr/local/bin/yt-dlp
 				local app_no=$sub_choice
 				sed -i "/\b${app_no}\b/d" /home/docker/appno.txt
 				echo "卸载完成。按任意键继续..."
@@ -8514,7 +8514,7 @@ linux_panel() {
 	  echo -e "${gl_kjlan}77.  ${color77}迅雷离线下载工具                    ${gl_kjlan}78.  ${color78}PandaWiki智能文档管理系统"
 	  echo -e "${gl_kjlan}79.  ${color79}Beszel服务器监控                    ${gl_kjlan}80.  ${color80}linkwarden书签管理"
 	  echo -e "${gl_kjlan}------------------------"
-	  echo -e "${gl_kjlan}81.  ${color81}JitsiMeet视频会议"
+	  echo -e "${gl_kjlan}81.  ${color81}JitsiMeet视频会议                   ${gl_kjlan}82.  ${color82}gpt-load高性能AI透明代理"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}0.   ${gl_bai}返回主菜单"
 	  echo -e "${gl_kjlan}------------------------${gl_bai}"
@@ -10409,7 +10409,7 @@ linux_panel() {
 
 				mkdir -p /home/docker/astrbot/data
 
-				sudo docker run -d \
+				docker run -d \
 				  -p ${docker_port}:6185 \
 				  -p 6195:6195 \
 				  -p 6196:6196 \
@@ -10808,6 +10808,33 @@ linux_panel() {
 
 			  ;;
 
+
+
+		  82)
+
+			local docker_name="gpt-load"
+			local docker_img="tbphp/gpt-load:latest"
+			local docker_port=8082
+
+			docker_rum() {
+
+				mkdir -p /home/docker/gpt-load && \
+				docker run -d --name gpt-load \
+					-p ${docker_port}:3001 \
+					-e AUTH_KEY=sk-123456 \
+					-v "/home/docker/gpt-load/data":/app/data \
+					tbphp/gpt-load:latest
+
+			}
+
+			local docker_describe="高性能AI接口透明代理服务"
+			local docker_url="官网介绍: https://www.gpt-load.com/"
+			local docker_use="echo \"默认管理密钥: sk-123456\""
+			local docker_passwd=""
+			local app_size="1"
+			docker_app
+
+			  ;;
 
 
 
@@ -11237,6 +11264,8 @@ EOF
 
 			useradd -m -s /bin/bash "$new_username"
 			passwd "$new_username"
+
+			install sudo
 
 			echo "$new_username ALL=(ALL:ALL) ALL" | tee -a /etc/sudoers
 
