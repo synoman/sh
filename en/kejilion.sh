@@ -1558,7 +1558,7 @@ fi
 
 add_yuming() {
 	  ip_address
-	  echo -e "First resolve the domain name to the local IP:${gl_huang}$ipv4_address  $ipv6_address${gl_bai}"
+	  echo -e "First resolve the domain name to the native IP:${gl_huang}$ipv4_address  $ipv6_address${gl_bai}"
 	  read -e -p "Please enter your IP or the resolved domain name:" yuming
 }
 
@@ -12632,7 +12632,7 @@ linux_file() {
 			5)  # 删除目录
 				read -e -p "Please enter the directory name to delete:" dirname
 				rm -rf "$dirname" && echo "Directory has been deleted" || echo "Deletion failed"
-				send_stats "Delete directory"
+				send_stats "Delete Directory"
 				;;
 			6)  # 返回上一级选单目录
 				cd ..

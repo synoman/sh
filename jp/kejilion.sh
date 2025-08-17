@@ -2101,7 +2101,7 @@ web_security() {
 					  echo "CF背景の右上隅に移動し、左側のAPIトークンを選択し、グローバルAPIキーを取得します"
 					  echo "https://dash.cloudflare.com/login"
 					  read -e -p "CFアカウント番号を入力します：" cfuser
-					  read -e -p "CFのグローバルAPIキーを入力してください。" cftoken
+					  read -e -p "CFのグローバルAPIキーを入力してください：" cftoken
 
 					  wget -O /home/web/conf.d/default.conf ${gh_proxy}raw.githubusercontent.com/kejilion/nginx/main/default11.conf
 					  docker exec nginx nginx -s reload
@@ -2129,7 +2129,7 @@ web_security() {
 					  echo "https://dash.cloudflare.com/login"
 					  echo "--------------"
 					  read -e -p "CFアカウント番号を入力します：" cfuser
-					  read -e -p "CFのグローバルAPIキーを入力してください。" cftoken
+					  read -e -p "CFのグローバルAPIキーを入力してください：" cftoken
 					  read -e -p "CFにドメイン名の領域IDを入力します。" cfzonID
 
 					  cd ~
@@ -3391,7 +3391,7 @@ ldnmp_web_status() {
 		echo "------------------------"
 		echo "1.ドメイン名証明書を適用/更新する2。サイトドメイン名を変更します"
 		echo "3.サイトキャッシュをクリーンアップ4。関連するサイトを作成する"
-		echo "5.アクセスログを表示6。エラーログを表示します"
+		echo "5.  查看访问日志                    6.  查看错误日志"
 		echo "7.グローバル構成の編集8。サイト構成の編集"
 		echo "9.サイトデータベースの管理10。サイト分析レポートを表示します"
 		echo "------------------------"
@@ -4870,7 +4870,7 @@ bbrv3() {
 				  echo ""
 				  echo "カーネル管理"
 				  echo "------------------------"
-				  echo "1。BBRV3カーネルを更新します2。BBRV3カーネルをアンインストールします"
+				  echo "1。BBRV3カーネルを更新する2。BBRV3カーネルをアンインストールします"
 				  echo "------------------------"
 				  echo "0。前のメニューに戻ります"
 				  echo "------------------------"
@@ -5715,7 +5715,7 @@ create_backup() {
 	if [ $? -eq 0 ]; then
 		echo "バックアップは正常に作成されました：$BACKUP_DIR/$BACKUP_NAME"
 	else
-		echo "バックアップの作成に失敗しました！"
+		echo "备份创建失败！"
 		exit 1
 	fi
 }
@@ -6369,7 +6369,7 @@ schedule_task() {
 	local cron_job="$cron_time k rsync_run $num"
 	local cron_job="$cron_time k rsync_run $num"
 
-	# 同じタスクがすでに存在するかどうかを確認してください
+	# 同じタスクが既に存在するかどうかを確認してください
 	if crontab -l | grep -q "k rsync_run $num"; then
 		echo "エラー：このタスクのタイミング同期はすでに存在しています！"
 		return
@@ -6649,7 +6649,7 @@ linux_tools() {
 			  clear
 			  echo "ツールがインストールされており、使用方法は次のとおりです。"
 			  ffmpeg --help
-			  send_stats "FFMPEGをインストールします"
+			  send_stats "ffmpegをインストールします"
 			  ;;
 
 			11)
@@ -8313,7 +8313,7 @@ linux_ldnmp() {
 		  fi
 		  echo "------------------------"
 		  echo
-		  echo "1.更新nginx2。mysql3を更新します。php4を更新します。redisを更新します"
+		  echo "1。更新nginx2。mysql3を更新します。php4を更新します。redisを更新します"
 		  echo "------------------------"
 		  echo "5。完全な環境を更新します"
 		  echo "------------------------"
@@ -8520,7 +8520,7 @@ while true; do
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}61.  ${color61}オンライン翻訳サーバー${gl_kjlan}62.  ${color62}Ragflow Big Model Knowledge Base"
 	  echo -e "${gl_kjlan}63.  ${color63}OpenWebui自己ホストAIプラットフォーム${gl_huang}★${gl_bai}             ${gl_kjlan}64.  ${color64}IT-Toolsツールボックス"
-	  echo -e "${gl_kjlan}65.  ${color65}N8Nオートメーションワークフロープラットフォーム${gl_huang}★${gl_bai}               ${gl_kjlan}66.  ${color66}YT-DLPビデオダウンロードツール"
+	  echo -e "${gl_kjlan}65.  ${color65}N8Nオートメーションワークフロープラットフォーム${gl_huang}★${gl_bai}               ${gl_kjlan}66.  ${color66}yt-dlp视频下载工具"
 	  echo -e "${gl_kjlan}67.  ${color67}DDNS-GOダイナミックDNS管理ツール${gl_huang}★${gl_bai}            ${gl_kjlan}68.  ${color68}AllinsSL証明書管理プラットフォーム"
 	  echo -e "${gl_kjlan}69.  ${color69}SFTPGOファイル転送ツール${gl_kjlan}70.  ${color70}アストロボットチャットロボットフレームワーク"
 	  echo -e "${gl_kjlan}------------------------"
@@ -11353,13 +11353,13 @@ linux_Settings() {
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}11.  ${gl_bai}ポートの職業ステータスを確認してください${gl_kjlan}12.  ${gl_bai}仮想メモリサイズを変更します"
 	  echo -e "${gl_kjlan}13.  ${gl_bai}ユーザー管理${gl_kjlan}14.  ${gl_bai}ユーザー/パスワードジェネレーター"
-	  echo -e "${gl_kjlan}15.  ${gl_bai}システムタイムゾーンの調整${gl_kjlan}16.  ${gl_bai}BBR3加速度を設定します"
+	  echo -e "${gl_kjlan}15.  ${gl_bai}システムタイムゾーンの調整${gl_kjlan}16.  ${gl_bai}BBR3加速度をセットアップします"
 	  echo -e "${gl_kjlan}17.  ${gl_bai}ファイアウォール上級マネージャー${gl_kjlan}18.  ${gl_bai}ホスト名を変更します"
 	  echo -e "${gl_kjlan}19.  ${gl_bai}システムの更新ソースを切り替えます${gl_kjlan}20.  ${gl_bai}タイミングタスク管理"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}21.  ${gl_bai}ネイティブホスト分析${gl_kjlan}22.  ${gl_bai}SSH防衛プログラム"
 	  echo -e "${gl_kjlan}23.  ${gl_bai}電流制限の自動シャットダウン${gl_kjlan}24.  ${gl_bai}ルート秘密キーログインモード"
-	  echo -e "${gl_kjlan}25.  ${gl_bai}TGボットシステムの監視と早期警告${gl_kjlan}26.  ${gl_bai}OpenSSHハイリスクの脆弱性を修正します"
+	  echo -e "${gl_kjlan}25.  ${gl_bai}TGボットシステムの監視と早期警告${gl_kjlan}26.  ${gl_bai}OpenSSHの高リスクの脆弱性を修正します"
 	  echo -e "${gl_kjlan}27.  ${gl_bai}Red Hat Linuxカーネルのアップグレード${gl_kjlan}28.  ${gl_bai}Linuxシステムにおけるカーネルパラメーターの最適化${gl_huang}★${gl_bai}"
 	  echo -e "${gl_kjlan}29.  ${gl_bai}ウイルススキャンツール${gl_huang}★${gl_bai}                     ${gl_kjlan}30.  ${gl_bai}ファイルマネージャー"
 	  echo -e "${gl_kjlan}------------------------"
@@ -11381,7 +11381,7 @@ linux_Settings() {
 		  1)
 			  while true; do
 				  clear
-				  read -e -p "ショートカットキーを入力してください（0を入力して終了してください）：" kuaijiejian
+				  read -e -p "ショートカットキーを入力してください（出口に0を入力してください）：" kuaijiejian
 				  if [ "$kuaijiejian" == "0" ]; then
 					   break_end
 					   linux_Settings
@@ -11841,7 +11841,7 @@ EOF
 				echo "------------------------"
 				echo "アメリカ"
 				echo "21。WesternTime22。東部時間"
-				echo "23. 加拿大时间               24. 墨西哥时间"
+				echo "23。カナダ時間24。メキシコの時間"
 				echo "25。ブラジル時間26。アルゼンチン時間"
 				echo "------------------------"
 				echo "31。UTCグローバル標準時間"
@@ -12014,7 +12014,7 @@ EOF
 								  break  # 跳出
 								  ;;
 						  esac
-						  send_stats "タイムされたタスクを追加します"
+						  send_stats "時限タスクを追加します"
 						  ;;
 					  2)
 						  read -e -p "削除する必要があるキーワードを入力してください。" kquest
@@ -12167,7 +12167,7 @@ EOF
 				case "$Limiting" in
 				  1)
 					# 新しい仮想メモリサイズを入力します
-					echo "実際のサーバーに100gのトラフィックがある場合、しきい値を95gに設定し、事前に電源を停止して、トラフィックエラーやオーバーフローを避けることができます。"
+					echo "実際のサーバーに100gのトラフィックがある場合、しきい値を95gに設定し、事前に電源をシャットダウンして、トラフィックエラーやオーバーフローを回避できます。"
 					read -e -p "着信トラフィックのしきい値を入力してください（ユニットはG、デフォルトは100gです）：" rx_threshold_gb
 					rx_threshold_gb=${rx_threshold_gb:-100}
 					read -e -p "アウトバウンドトラフィックのしきい値を入力してください（ユニットはG、デフォルトは100gです）：" tx_threshold_gb
@@ -12214,7 +12214,7 @@ EOF
 			  	  echo "------------------------------------------------"
 			  	  echo "キーペアが生成され、SSHログインのより安全な方法"
 				  echo "------------------------"
-				  echo "1.新しいキーを生成する2。既存のキーをインポートする3。ネイティブキーを表示"
+				  echo "1.新しいキーを生成する2。既存のキーをインポートする3。ネイティブキーを表示します"
 				  echo "------------------------"
 				  echo "0。前のメニューに戻ります"
 				  echo "------------------------"
@@ -12259,7 +12259,7 @@ EOF
 			  echo "TG-BOTモニタリングと早期警告機能"
 			  echo "ビデオの紹介：https：//youtu.be/vll-eb3z_ty"
 			  echo "------------------------------------------------"
-			  echo "ネイティブCPU、メモリ、ハードディスク、トラフィック、SSHログインのリアルタイム監視と早期警告を実現するために、TG Robot APIとユーザーIDを構成する必要があります。"
+			  echo "ネイティブCPU、メモリ、ハードディスク、トラフィック、およびSSHログインのリアルタイム監視と早期警告を実現するために、TG Robot APIとユーザーIDを構成する必要があります。"
 			  echo "しきい値に達した後、ユーザーはユーザーに送信されます"
 			  echo -e "${gl_hui}- トラフィックに関しては、サーバーの再起動が再計算されます -${gl_bai}"
 			  read -e -p "必ず続行しますか？ （y/n）：" choice
@@ -12619,7 +12619,7 @@ linux_file() {
 				;;
 			3)  # 修改目录权限
 				read -e -p "ディレクトリ名を入力してください：" dirname
-				read -e -p "許可（755など）を入力してください。" perm
+				read -e -p "許可を入力してください（755など）：" perm
 				chmod "$perm" "$dirname" && echo "許可が変更されました" || echo "変更に失敗しました"
 				send_stats "ディレクトリ権限を変更します"
 				;;
@@ -12651,7 +12651,7 @@ linux_file() {
 				;;
 			13) # 修改文件权限
 				read -e -p "ファイル名を入力してください：" filename
-				read -e -p "許可（755など）を入力してください。" perm
+				read -e -p "許可を入力してください（755など）：" perm
 				chmod "$perm" "$filename" && echo "許可が変更されました" || echo "変更に失敗しました"
 				send_stats "ファイル権限を変更します"
 				;;
@@ -12683,7 +12683,7 @@ linux_file() {
 				read -e -p "移動するには、ファイルまたはディレクトリパスを入力してください。" src_path
 				if [ ! -e "$src_path" ]; then
 					echo "エラー：ファイルまたはディレクトリは存在しません。"
-					send_stats "ファイルまたはディレクトリの移動に失敗しました：ファイルまたはディレクトリが存在しません"
+					send_stats "ファイルまたはディレクトリの移動に失敗しました：ファイルまたはディレクトリは存在しません"
 					continue
 				fi
 
@@ -12962,7 +12962,7 @@ echo "------------------------"
 echo -e "${gl_lan}dmit四半期あたり28ドルUS CN2GIA 1コア2Gメモリ20Gハードドライブ800gトラフィック${gl_bai}"
 echo -e "${gl_bai}ウェブサイト：https：//www.dmit.io/aff.php?aff = 4966&pid=100${gl_bai}"
 echo "------------------------"
-echo -e "${gl_zi}V.PS月額6.9 $ 6.9東京ソフトバンク2コア1Gメモリ20gハードドライブ1tトラフィック${gl_bai}"
+echo -e "${gl_zi}V.PS月額6.9 $ 6.9東京ソフトバンク2コア1Gメモリ20gハードドライブ1Tトラフィック${gl_bai}"
 echo -e "${gl_bai}ウェブサイト：https：//vps.hosting/cart/tokyo-cloud-kvm-vps/?id=148&?faffid=1355 &? affid=1355${gl_bai}"
 echo "------------------------"
 echo -e "${gl_kjlan}より人気のあるVPSオファー${gl_bai}"
@@ -13181,11 +13181,11 @@ echo "ドメイン名証明書の有効期限クエリK SSL PS"
 echo "Docker Environment Installation K Dockerインストール| K Dockerのインストール"
 echo "Docker Container Management K Docker PS | K Dockerコンテナ"
 echo "Docker Image Management K Docker IMG | K Docker画像"
-echo "LDNMPサイト管理K Web"
+echo "LDNMPサイト管理k Web"
 echo "LDNMPキャッシュクリーンアップK Webキャッシュ"
 echo "WordPress k wp | k wordpress | k wp xxx.comをインストールします"
 echo "リバースプロキシk fd | k rp | k抗ジェネレーション| k fd xxx.comをインストールする"
-echo "ロードバランシングkロードバランス| kロードバランシングをインストールします"
+echo "ロードバランスkロードバランス| kロードバランシングをインストールします"
 echo "ファイアウォールパネルk fhq | kファイアウォール"
 echo "オープンポートK DKDK 8080 | Kオープンポート8080"
 echo "ポートK GBDK 7800を閉じる| kポート7800を閉じます"
@@ -13245,7 +13245,7 @@ else
 
 		rsync_run)
 			shift
-			send_stats "タイミング付きRSYNC同期"
+			send_stats "タイム付きRSYNC同期"
 			run_task "$@"
 			;;
 
