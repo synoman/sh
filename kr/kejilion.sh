@@ -34,7 +34,7 @@ quanju_canshu
 
 
 
-# 명령을 실행할 함수를 정의합니다
+# 명령을 실행하는 함수를 정의합니다
 run_command() {
 	if [ "$zhushi" -eq 0 ]; then
 		"$@"
@@ -1185,7 +1185,7 @@ iptables_panel() {
 
 			  5)
 				  # IP 화이트리스트
-				  read -e -p "릴리스하려면 IP 또는 IP 세그먼트를 입력하십시오." o_ip
+				  read -e -p "해제 할 IP 또는 IP 세그먼트를 입력하십시오." o_ip
 				  allow_ip $o_ip
 				  ;;
 			  6)
@@ -1234,7 +1234,7 @@ iptables_panel() {
 				  ;;
 
 			  17)
-				  read -e -p "청산 된 국가 코드 (예 : CN, US, JP)를 입력하십시오 :" country_code
+				  read -e -p "청산 된 국가 코드 (예 : CN, US, JP)를 입력하십시오." country_code
 				  manage_country_rules unblock $country_code
 				  send_stats "나라를 정리하십시오$country_codeIP"
 				  ;;
@@ -1558,7 +1558,7 @@ fi
 
 add_yuming() {
 	  ip_address
-	  echo -e "먼저 도메인 이름을 기본 IP로 해결합니다.${gl_huang}$ipv4_address  $ipv6_address${gl_bai}"
+	  echo -e "먼저 도메인 이름을 로컬 IP로 해결합니다.${gl_huang}$ipv4_address  $ipv6_address${gl_bai}"
 	  read -e -p "IP 또는 해결 된 도메인 이름을 입력하십시오." yuming
 }
 
@@ -2121,7 +2121,7 @@ web_security() {
 
 				  22)
 					  send_stats "5 초 방패의 높은 하중"
-					  echo -e "${gl_huang}웹 사이트는 5 분마다 자동으로 감지됩니다. 높은 부하가 감지되면 방패가 자동으로 켜지고 5 초 동안 낮은 부하가 자동으로 꺼집니다.${gl_bai}"
+					  echo -e "${gl_huang}웹 사이트는 5 분마다 자동으로 감지됩니다. 높은 하중의 감지에 도달하면 방패가 자동으로 켜지고 낮은 부하가 자동으로 5 초 동안 꺼집니다.${gl_bai}"
 					  echo "--------------"
 					  echo "CF 매개 변수 가져 오기 :"
 					  echo -e "CF 배경의 오른쪽 상단 모서리로 이동하여 왼쪽의 API 토큰을 선택하고 얻습니다.${gl_huang}Global API Key${gl_bai}"
@@ -3946,7 +3946,7 @@ frps_panel() {
 
 			8)
 				send_stats "IP 액세스를 차단하십시오"
-				echo "반세기 도메인 이름에 액세스 한 경우이 기능을 사용하여 IP+ 포트 액세스를 차단할 수 있습니다."
+				echo "반세기 도메인 이름에 액세스 한 경우이 기능을 사용하여 IP+ 포트 액세스를 차단하십시오."
 				read -e -p "차단 해야하는 포트를 입력하십시오." frps_port
 				block_host_port "$frps_port" "$ipv4_address"
 				;;
@@ -5131,7 +5131,7 @@ clamav_scan() {
 		clamscan -r --log=/var/log/clamav/scan.log $SCAN_PARAMS
 
 	echo -e "${gl_lv}$@ scan이 완료되고 바이러스 보고서가 저장됩니다${gl_huang}/home/docker/clamav/log/scan.log${gl_bai}"
-	echo -e "${gl_lv}바이러스가 있다면 제발${gl_huang}scan.log${gl_lv}파일에서 찾은 키워드를 검색하여 바이러스의 위치를 확인하십시오.${gl_bai}"
+	echo -e "${gl_lv}바이러스가 있다면 제발${gl_huang}scan.log${gl_lv}파일에서 찾은 키워드를 검색하여 바이러스의 위치를 ​​확인하십시오.${gl_bai}"
 
 }
 
@@ -5446,7 +5446,7 @@ update_locale() {
 				locale-gen
 				echo "LANG=${lang}" > /etc/default/locale
 				export LANG=${lang}
-				echo -e "${gl_lv}시스템 언어는 다음으로 수정되었습니다.$langSSH를 다시 연결하면 적용됩니다.${gl_bai}"
+				echo -e "${gl_lv}시스템 언어는 다음으로 수정되었습니다.$langSSH를 다시 ​​연결하면 적용됩니다.${gl_bai}"
 				hash -r
 				break_end
 
@@ -5455,7 +5455,7 @@ update_locale() {
 				install glibc-langpack-zh
 				localectl set-locale LANG=${lang}
 				echo "LANG=${lang}" | tee /etc/locale.conf
-				echo -e "${gl_lv}시스템 언어는 다음으로 수정되었습니다.$langSSH를 다시 연결하면 적용됩니다.${gl_bai}"
+				echo -e "${gl_lv}시스템 언어는 다음으로 수정되었습니다.$langSSH를 다시 ​​연결하면 적용됩니다.${gl_bai}"
 				hash -r
 				break_end
 				;;
@@ -5519,7 +5519,7 @@ else
 	echo "${bianse}" >> ~/.profile
 	# source ~/.profile
 fi
-echo -e "${gl_lv}변경이 완료되었습니다. 변경 사항을 볼 수 있도록 SSH를 다시 연결하십시오!${gl_bai}"
+echo -e "${gl_lv}변경이 완료되었습니다. 변경 사항을 볼 수 있도록 SSH를 다시 ​​연결하십시오!${gl_bai}"
 
 hash -r
 break_end
@@ -6875,7 +6875,7 @@ linux_docker() {
 	  echo -e "${gl_kjlan}11.  ${gl_bai}Docker-IPV6 액세스를 활성화하십시오"
 	  echo -e "${gl_kjlan}12.  ${gl_bai}Docker-IPV6 액세스를 닫습니다"
 	  echo -e "${gl_kjlan}------------------------"
-	  echo -e "${gl_kjlan}20.  ${gl_bai}도커 환경을 제거하십시오"
+	  echo -e "${gl_kjlan}20.  ${gl_bai}Docker 환경을 제거하십시오"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}0.   ${gl_bai}메인 메뉴로 돌아갑니다"
 	  echo -e "${gl_kjlan}------------------------${gl_bai}"
@@ -7339,7 +7339,7 @@ linux_Oracle() {
 				  read -e -p "CPU 코어 수를 입력하십시오 [기본값 :$DEFAULT_CPU_CORE]: " cpu_core
 				  local cpu_core=${cpu_core:-$DEFAULT_CPU_CORE}
 
-				  read -e -p "CPU 사용량 백분율 범위 (예 : 10-20)를 입력하십시오 [기본값 :$DEFAULT_CPU_UTIL]: " cpu_util
+				  read -e -p "CPU 사용 백분율 범위 (예 : 10-20) [기본값 :$DEFAULT_CPU_UTIL]: " cpu_util
 				  local cpu_util=${cpu_util:-$DEFAULT_CPU_UTIL}
 
 				  read -e -p "메모리 사용 백분율을 입력하십시오 [기본값 :$DEFAULT_MEM_UTIL]: " mem_util
@@ -7924,7 +7924,7 @@ linux_ldnmp() {
 			  ;;
 		  2)
 			  echo "데이터베이스 백업은 .gz-end 압축 패키지 여야합니다. Pagoda/1Panel의 백업 데이터 가져 오기를 지원하려면/홈/디렉토리에 넣으십시오."
-			  read -e -p "다운로드 링크를 입력하여 백업 데이터를 원격으로 다운로드 할 수도 있습니다. 원격 다운로드를 건너 뛰려면 Enter를 직접 누르십시오." url_download_db
+			  read -e -p "다운로드 링크를 입력하여 백업 데이터를 원격으로 다운로드 할 수도 있습니다. Enter가 직접 누르면 원격 다운로드를 건너 뜁니다." url_download_db
 
 			  cd /home/
 			  if [ -n "$url_download_db" ]; then
@@ -8519,8 +8519,8 @@ while true; do
 	  echo -e "${gl_kjlan}59.  ${color59}Newapi 큰 모델 자산 관리${gl_kjlan}60.  ${color60}점프 서버 오픈 소스 요새 기계"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}61.  ${color61}온라인 번역 서버${gl_kjlan}62.  ${color62}래그 플로 큰 모델 지식 기반"
-	  echo -e "${gl_kjlan}63.  ${color63}OpenWebui 자체 호스팅 AI 플랫폼${gl_huang}★${gl_bai}             ${gl_kjlan}64.  ${color64}it-tools 도구 상자"
-	  echo -e "${gl_kjlan}65.  ${color65}N8N 자동화 워크 플로 플로우 플랫폼${gl_huang}★${gl_bai}               ${gl_kjlan}66.  ${color66}YT-DLP 비디오 다운로드 도구"
+	  echo -e "${gl_kjlan}63.  ${color63}OpenWebUI自托管AI平台 ${gl_huang}★${gl_bai}             ${gl_kjlan}64.  ${color64}it-tools 도구 상자"
+	  echo -e "${gl_kjlan}65.  ${color65}N8N 자동화 워크 플로 플랫폼${gl_huang}★${gl_bai}               ${gl_kjlan}66.  ${color66}YT-DLP 비디오 다운로드 도구"
 	  echo -e "${gl_kjlan}67.  ${color67}DDNS-GO 동적 DNS 관리 도구${gl_huang}★${gl_bai}            ${gl_kjlan}68.  ${color68}AllInsSL 인증서 관리 플랫폼"
 	  echo -e "${gl_kjlan}69.  ${color69}sftpgo 파일 전송 도구${gl_kjlan}70.  ${color70}Astrbot 채팅 로봇 프레임 워크"
 	  echo -e "${gl_kjlan}------------------------"
@@ -11388,7 +11388,7 @@ linux_Settings() {
 				  fi
 				  find /usr/local/bin/ -type l -exec bash -c 'test "$(readlink -f {})" = "/usr/local/bin/k" && rm -f {}' \;
 				  ln -s /usr/local/bin/k /usr/local/bin/$kuaijiejian
-				  echo "바로 가기 키가 설정되었습니다"
+				  echo "바로 가기 키가 설정되어 있습니다"
 				  send_stats "스크립트 바로 가기 키가 설정되었습니다"
 				  break_end
 				  linux_Settings
@@ -11553,7 +11553,7 @@ EOF
 			  ;;
 		  9)
 			root_use
-			send_stats "새로운 사용자가 루트를 비활성화합니다"
+			send_stats "신규 사용자는 루트를 비활성화합니다"
 			read -e -p "새 사용자 이름을 입력하십시오 (종료하려면 0을 입력하십시오) :" new_username
 			if [ "$new_username" == "0" ]; then
 				break_end
@@ -11832,12 +11832,12 @@ EOF
 				echo "3. 일본의 도쿄 시간 4. 한국의 서울 시간"
 				echo "5. 싱가포르 시간 6. 인도의 콜카타 시간"
 				echo "7. UAE 8의 두바이 시간. 호주 시드니 시간"
-				echo "9. 태국 방콕에서의 시간"
+				echo "9. 방콕 시간, 태국"
 				echo "------------------------"
 				echo "유럽"
 				echo "11. 영국의 런던 시간 12. 프랑스의 파리 시간"
 				echo "13. 베를린 시간, 독일 14. 모스크바 시간, 러시아"
-				echo "15. 네덜란드의 위트레흐트 시간 16. 스페인의 마드리드 시간"
+				echo "15. 네덜란드에서 우트레흐트 시간 16. 스페인의 마드리드 시간"
 				echo "------------------------"
 				echo "미국"
 				echo "21. 서양 시간 22. 동부 시간"
@@ -12003,7 +12003,7 @@ EOF
 								  (crontab -l ; echo "0 0 * * $weekday $newquest") | crontab - > /dev/null 2>&1
 								  ;;
 							  3)
-								  read -e -p "매일 작업을 수행 할 시간을 선택하십시오. (시간, 0-23) :" hour
+								  read -e -p "매일 작업을 수행 할시기를 선택 하시겠습니까? (시간, 0-23) :" hour
 								  (crontab -l ; echo "0 $hour * * * $newquest") | crontab - > /dev/null 2>&1
 								  ;;
 							  4)
@@ -12058,7 +12058,7 @@ EOF
 
 						  ;;
 					  2)
-						  read -e -p "삭제 해야하는 구문 분석 컨텐츠의 키워드를 입력하십시오." delhost
+						  read -e -p "삭제 해야하는 콘텐츠를 구문 분석하기위한 키워드를 입력하십시오." delhost
 						  sed -i "/$delhost/d" /etc/hosts
 						  send_stats "로컬 호스트 구문 분석 및 삭제"
 						  ;;
@@ -12710,13 +12710,13 @@ linux_file() {
 				read -e -p "대상 경로를 입력하십시오 (새 파일 이름 또는 디렉토리 이름 포함) :" dest_path
 				if [ -z "$dest_path" ]; then
 					echo "오류 : 대상 경로를 입력하십시오."
-					send_stats "复制文件或目录失败: 目标路径未指定"
+					send_stats "파일 또는 디렉토리 복사에 실패 : 지정되지 않은 대상 경로"
 					continue
 				fi
 
 				# -r 옵션을 사용하여 디렉토리를 재귀 적으로 복사하십시오
 				cp -r "$src_path" "$dest_path" && echo "파일 또는 디렉토리가 복사되었습니다$dest_path" || echo "파일이나 디렉토리를 복사하지 못했습니다"
-				send_stats "파일 또는 디렉토리를 복사하십시오"
+				send_stats "파일 또는 디렉토리를 복사합니다"
 				;;
 
 
@@ -12950,7 +12950,7 @@ echo "------------------------"
 echo -e "${gl_lan}Leica Cloud Hong Kong CN2 Gia 한국 이중 ISP US CN2 GIA 할인${gl_bai}"
 echo -e "${gl_bai}웹 사이트 : https://www.lcayun.com/aff/zexuqbim${gl_bai}"
 echo "------------------------"
-echo -e "${gl_lan}Racknerd $ 10.99 미국 1 코어 1G 메모리 20g 하드 드라이브 1T 트래픽 월${gl_bai}"
+echo -e "${gl_lan}Racknerd $ 10.99 미국 1 코어 1G 메모리 20G 하드 드라이브 1T 트래픽 월에 한 달에 트래픽${gl_bai}"
 echo -e "${gl_bai}웹 사이트 : https://my.racknerd.com/aff.php?aff=5501&pid=879${gl_bai}"
 echo "------------------------"
 echo -e "${gl_zi}Hostinger 52.7 달러 미국 1 코어 4G 메모리 50G 하드 드라이브 4T 트래픽 월${gl_bai}"
