@@ -9678,7 +9678,7 @@ moltbot_menu() {
 		echo "2.  启动"
 		echo "3.  停止"
 		echo "--------------------"
-		echo "4.  日志查看"
+		echo "4.  状态日志查看"
 		echo "5.  换模型"
 		echo "6.  加新模型API"
 		echo "7.  TG输入连接码"
@@ -9745,8 +9745,10 @@ moltbot_menu() {
 	}
 
 	view_logs() {
-		echo "查看 OpenClaw 日志，Ctrl+C 退出"
+		echo "查看 OpenClaw 状态日志"
 		send_stats "查看 OpenClaw 日志"
+		openclaw status
+		openclaw gateway status
 		openclaw logs
 		break_end
 	}
