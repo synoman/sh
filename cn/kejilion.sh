@@ -1,5 +1,5 @@
 #!/bin/bash
-sh_v="4.3.10"
+sh_v="4.4.0"
 
 
 gl_hui='\e[37m'
@@ -9696,16 +9696,11 @@ moltbot_menu() {
 	}
 
 
-	start_tmux() {
-		install tmux
+	start_gateway() {
 		openclaw gateway stop
-		tmux kill-session -t gateway > /dev/null 2>&1
-		tmux new -d -s gateway "openclaw gateway"
-		check_crontab_installed
-		crontab -l 2>/dev/null | grep -q "s gateway" || (crontab -l 2>/dev/null; echo "* * * * * tmux has-session -t gateway 2>/dev/null || tmux new -d -s gateway 'openclaw gateway'") | crontab -
+		openclaw gateway start
 		sleep 3
 	}
-
 
 	install_moltbot() {
 		echo "开始安装 OpenClaw..."
@@ -9725,7 +9720,7 @@ moltbot_menu() {
 			npm config set registry https://registry.npmmirror.com
 		fi
 		curl -fsSL https://openclaw.ai/install.sh | bash
-		start_tmux
+		start_gateway
 		add_app_id
 		break_end
 
@@ -9735,7 +9730,7 @@ moltbot_menu() {
 	start_bot() {
 		echo "启动 OpenClaw..."
 		send_stats "启动 OpenClaw..."
-		start_tmux
+		start_gateway
 		break_end
 	}
 
@@ -9743,7 +9738,6 @@ moltbot_menu() {
 		echo "停止 OpenClaw..."
 		send_stats "停止 OpenClaw..."
 		openclaw gateway stop
-		tmux kill-session -t gateway > /dev/null 2>&1
 		break_end
 	}
 
@@ -9964,7 +9958,7 @@ EOF
 			echo
 			echo "🔄 设置默认模型并重启网关..."
 			openclaw models set "$provider_name/$default_model"
-			start_tmux
+			start_gateway
 			echo "✅ 完成！所有 $model_count 个模型已加载"
 		fi
 
@@ -10079,7 +10073,7 @@ EOF
 				openclaw plugins enable "$plugin_name"
 			fi
 
-			start_tmux
+			start_gateway
 			break_end
 		done
 	}
@@ -10155,7 +10149,7 @@ EOF
 						openclaw plugins enable "$plugin_id"
 					else
 						echo "❌ 严重错误：无法获取该插件。请检查 ID 是否正确或网络是否可用。"
-						# 关键：这里直接 return 或 continue，不走下面的 start_tmux，防止写死配置
+						# 关键：这里直接 return 或 continue，不走下面的 start_gateway，防止写死配置
 						break_end
 						continue
 					fi
@@ -10163,7 +10157,7 @@ EOF
 			fi
 
 			echo "🔄 正在重启 OpenClaw 服务以加载新插件..."
-			start_tmux
+			start_gateway
 			break_end
 		done
 	}
@@ -10227,7 +10221,7 @@ EOF
 			if [ $? -eq 0 ]; then
 				echo "✅ 技能 $skill_name 安装成功。"
 				# 执行重启/启动服务逻辑
-				start_tmux
+				start_gateway
 			else
 				echo "❌ 安装失败。请检查技能名称是否正确，或参考文档排查。"
 			fi
@@ -10265,7 +10259,7 @@ EOF
 		send_stats "更新 OpenClaw..."
 		curl -fsSL https://openclaw.ai/install.sh | bash
 		openclaw gateway stop
-		start_tmux
+		start_gateway
 		add_app_id
 		echo "更新完成"
 		break_end
@@ -10288,7 +10282,7 @@ EOF
 		send_stats "编辑 OpenClaw 配置文件"
 		install nano
 		nano ~/.openclaw/openclaw.json
-		start_tmux
+		start_gateway
 	}
 
 
