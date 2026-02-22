@@ -9716,13 +9716,18 @@ moltbot_menu() {
 			dnf groupinstall -y "Development Tools"
 			dnf install -y cmake
 		fi
-
-		install npm pnpm
 		
 		country=$(curl -s ipinfo.io/country)
 		if [[ "$country" == "CN" || "$country" == "HK" ]]; then
-			pnpm config set registry https://registry.npmmirror.com
-			npm config set registry https://registry.npmmirror.com
+			# 检查并设置 pnpm
+			if command -v pnpm &> /dev/null; then
+				pnpm config set registry https://registry.npmmirror.com
+			fi
+
+			# 检查并设置 npm
+			if command -v npm &> /dev/null; then
+				npm config set registry https://registry.npmmirror.com
+			fi
 		fi
 		curl -fsSL https://openclaw.ai/install.sh | bash
 		start_gateway
