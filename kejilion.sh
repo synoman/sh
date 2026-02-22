@@ -9737,6 +9737,7 @@ moltbot_menu() {
 	stop_bot() {
 		echo "停止 OpenClaw..."
 		send_stats "停止 OpenClaw..."
+		tmux kill-session -t gateway > /dev/null 2>&1
 		openclaw gateway stop
 		break_end
 	}
