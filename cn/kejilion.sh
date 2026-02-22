@@ -9643,6 +9643,15 @@ moltbot_menu() {
 		fi
 	}
 
+
+	get_install_status() {
+		if command -v openclaw >/dev/null 2>&1; then
+			echo "${gl_lv}已安装${gl_bai}"
+		else
+			echo "${gl_hui}未安装${gl_bai}"
+		fi
+	}
+
 	get_running_status() {
 	  if systemctl --user is-active openclaw-gateway.service >/dev/null 2>&1; then
 		echo "${gl_lv}运行中${gl_bai}"
@@ -9651,13 +9660,6 @@ moltbot_menu() {
 	  fi
 	}
 	
-	get_running_status() {
-		if pgrep -f "openclaw gateway" >/dev/null 2>&1; then
-			echo "${gl_lv}运行中${gl_bai}"
-		else
-			echo "${gl_hui}未运行${gl_bai}"
-		fi
-	}
 
 	show_menu() {
 
