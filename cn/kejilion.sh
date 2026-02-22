@@ -9653,13 +9653,13 @@ moltbot_menu() {
 	}
 
 	get_running_status() {
-	  if systemctl --user is-active openclaw-gateway.service >/dev/null 2>&1; then
-		echo "${gl_lv}运行中${gl_bai}"
-	  else
-		echo "${gl_hui}未运行${gl_bai}"
-	  fi
+		if pgrep -f "openclaw-gatewa" >/dev/null 2>&1; then
+			echo "${gl_lv}运行中${gl_bai}"
+		else
+			echo "${gl_hui}未运行${gl_bai}"
+		fi
 	}
-	
+
 
 	show_menu() {
 
