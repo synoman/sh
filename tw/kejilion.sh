@@ -179,7 +179,7 @@ ipv6_address=$(curl -s --max-time 1 https://v6.ipinfo.io/ip && echo)
 
 install() {
 	if [ $# -eq 0 ]; then
-		echo "未提供软件包参数!"
+		echo "未提供軟體包參數!"
 		return 1
 	fi
 
@@ -620,7 +620,7 @@ docker_image() {
 while true; do
 	clear
 	send_stats "Docker映像管理"
-	echo "Docker镜像列表"
+	echo "Docker映像列表"
 	docker image ls
 	echo ""
 	echo "鏡像操作"
@@ -649,7 +649,7 @@ while true; do
 			done
 			;;
 		3)
-			send_stats "刪除鏡像"
+			send_stats "删除镜像"
 			read -e -p "請輸入鏡像名稱（多個鏡像名稱請以空格分隔）:" imagenames
 			for name in $imagenames; do
 				docker rmi -f $name
@@ -1498,7 +1498,7 @@ ssl_ps
 
 ssl_ps() {
 	echo -e "${gl_huang}已申請的證書到期情況${gl_bai}"
-	echo "網站資訊 證書到期時間"
+	echo "站點資訊 證書到期時間"
 	echo "------------------------"
 	for cert_dir in /etc/letsencrypt/live/*; do
 	  local cert_file="$cert_dir/fullchain.pem"
@@ -1542,7 +1542,7 @@ certs_status() {
 		send_stats "網域證書申請失敗"
 		echo -e "${gl_hong}注意:${gl_bai}證書申請失敗，請檢查以下可能原因並重試："
 		echo -e "1. 網域拼字錯誤 ➠ 請檢查網域名稱輸入是否正確"
-		echo -e "2. DNS解析问题 ➠ 确认域名已正确解析到本服务器IP"
+		echo -e "2. DNS解析問題 ➠ 確認網域名稱已正確解析至本伺服器IP"
 		echo -e "3. 網路設定問題 ➠ 如使用Cloudflare Warp等虛擬網路請暫時關閉"
 		echo -e "4. 防火牆限制 ➠ 檢查80/443連接埠是否開放，確保驗證可存取"
 		echo -e "5. 申請次數超限 ➠ Let's Encrypt有每週限額(5次/網域/週)"
@@ -1753,7 +1753,7 @@ cf_purge_cache() {
 	  echo "CF資訊保存在$CONFIG_FILE，可以後期修改CF訊息"
 	  read -e -p "請輸入你的 API_TOKEN:" API_TOKEN
 	  read -e -p "請輸入你的CF用戶名:" EMAIL
-	  read -e -p "请输入 zone_id（多个用空格分隔）: " -a ZONE_IDS
+	  read -e -p "請輸入 zone_id（多個以空格分隔）:" -a ZONE_IDS
 
 	  mkdir -p /home/web/config/
 	  echo "$API_TOKEN $EMAIL ${ZONE_IDS[*]}" > "$CONFIG_FILE"
@@ -2233,7 +2233,7 @@ web_security() {
 					  sed -i "s/APIKEY00000/$cftoken/g" /etc/fail2ban/action.d/cloudflare-docker.conf
 					  f2b_status
 
-					  echo "已配置cloudflare模式，可在cf後台，站點-安全性-事件中查看攔截記錄"
+					  echo "已設定cloudflare模式，可在cf後台，網站-安全性-事件中查看攔截記錄"
 					  ;;
 
 				  22)
@@ -2242,7 +2242,7 @@ web_security() {
 					  echo "--------------"
 					  echo "取得CF參數:"
 					  echo -e "到cf後台右上角我的個人資料，選擇左側API令牌，取得${gl_huang}Global API Key${gl_bai}"
-					  echo -e "到cf后台域名概要页面右下方获取${gl_huang}區域ID${gl_bai}"
+					  echo -e "到cf後台域名概要頁面右下方獲取${gl_huang}區域ID${gl_bai}"
 					  echo "https://dash.cloudflare.com/login"
 					  echo "--------------"
 					  read -e -p "輸入CF的帳號:" cfuser
@@ -2336,7 +2336,7 @@ check_nginx_compression() {
 		br_status=""
 	fi
 
-	# 检查 gzip 是否开启且未被注释
+	# 檢查 gzip 是否開啟且未被註釋
 	if grep -qE '^\s*gzip\s+on;' "$CONFIG_FILE"; then
 		gzip_status="gzip壓縮已開啟"
 	else
@@ -2965,7 +2965,7 @@ while true; do
 			;;
 
 		8)
-			send_stats "阻止IP访问 ${docker_name}"
+			send_stats "阻止IP訪問${docker_name}"
 			block_container_port "$docker_name" "$ipv4_address"
 			;;
 
@@ -3237,7 +3237,7 @@ f2b_basic_config() {
 
 	local jail_name="sshd"
 	if grep -qi 'Alpine' /etc/issue 2>/dev/null; then
-		# Alpine 默认 jail 通常为 sshd；仅当检测到自定义 alpine-sshd 规则时才切换
+		# Alpine 預設 jail 通常為 sshd；僅當偵測到自訂 alpine-sshd 規則時才切換
 		if [ -f /etc/fail2ban/filter.d/alpine-sshd.conf ] || [ -f /etc/fail2ban/jail.d/alpine-ssh.conf ] || [ -f /etc/fail2ban/jail.d/alpine-sshd.local ]; then
 			jail_name="alpine-sshd"
 		fi
@@ -3740,7 +3740,7 @@ ldnmp_Proxy_backend_stream() {
 	fi
 
 	# 取得監聽埠
-	read -erp "請輸入本機監聽埠 (如 3306):" listen_port
+	read -erp "请输入本机监听端口 (如 3306): " listen_port
 	if ! [[ "$listen_port" =~ ^[0-9]+$ ]]; then
 		echo "連接埠必須是數字"; return 1
 	fi
@@ -3893,7 +3893,7 @@ ldnmp_web_status() {
 			2)
 				send_stats "克隆站點域名"
 				read -e -p "請輸入舊網域名稱:" oddyuming
-				read -e -p "請輸入新網域:" yuming
+				read -e -p "請輸入新網域名稱:" yuming
 				install_certbot
 				install_ssltls
 				certs_status
@@ -3932,9 +3932,9 @@ ldnmp_web_status() {
 				;;
 			4)
 				send_stats "建立關聯站點"
-				echo -e "为现有的站点再关联一个新域名用于访问"
+				echo -e "為現有的站點再關聯一個新網域用於訪問"
 				read -e -p "請輸入現有的網域名稱:" oddyuming
-				read -e -p "請輸入新網域:" yuming
+				read -e -p "請輸入新網域名稱:" yuming
 				install_certbot
 				install_ssltls
 				certs_status
@@ -4471,7 +4471,7 @@ frpc_panel() {
 				configure_frpc
 
 				add_app_id
-				echo "FRP客户端已经安装完成"
+				echo "FRP客戶端已經安裝完成"
 				;;
 			2)
 				crontab -l | grep -v 'frpc' | crontab - > /dev/null 2>&1
@@ -4544,7 +4544,7 @@ yt_menu_pro() {
 		echo -e "官網位址：${gh_https_url}github.com/yt-dlp/yt-dlp"
 		echo "-------------------------"
 		echo "已下載影片清單:"
-		ls -td "$VIDEO_DIR"/*/ 2>/dev/null || echo "（暂无）"
+		ls -td "$VIDEO_DIR"/*/ 2>/dev/null || echo "（暫無）"
 		echo "-------------------------"
 		echo "1. 安裝 2. 更新 3. 卸載"
 		echo "-------------------------"
@@ -4788,7 +4788,7 @@ mkdir -p /etc/sysctl.d
 echo "net.core.default_qdisc=fq" > "$CONF"
 echo "net.ipv4.tcp_congestion_control=bbr" >> "$CONF"
 
-# 清理可能導致衝突的舊版 sysctl.conf 殘留
+# 清理可能導致衝突的舊版本 sysctl.conf 殘留
 sed -i '/net.ipv4.tcp_congestion_control/d' /etc/sysctl.conf 2>/dev/null
 sed -i '/net.core.default_qdisc/d' /etc/sysctl.conf 2>/dev/null
 
@@ -5030,7 +5030,7 @@ fetch_remote_ssh_keys() {
 	# 下載公鑰
 	if command -v curl >/dev/null 2>&1; then
 		curl -fsSL --connect-timeout 10 "${keys_url}" -o "${temp_file}" || {
-			echo "错误：无法从 URL 下载公钥（网络问题或地址无效）" >&2
+			echo "錯誤：無法從 URL 下載公鑰（網路問題或位址無效）" >&2
 			rm -f "${temp_file}"
 			return 1
 		}
@@ -5154,7 +5154,7 @@ sshkey_panel() {
 			break_end
 			  ;;
 		  2)
-			send_stats "导入已有公钥"
+			send_stats "導入已有公鑰"
 			import_sshkey
 			break_end
 			  ;;
@@ -5631,7 +5631,7 @@ bbrv3() {
 				install wget gnupg ca-certificates
 				mkdir -p /usr/share/keyrings /etc/apt/sources.list.d
 				if ! wget -qO - "$key_url" | gpg --dearmor -o "$keyring" --yes; then
-					echo "官方密钥下载失败，尝试备用下载源..."
+					echo "官方金鑰下載失敗，嘗試備用下載來源..."
 					wget -qO - "$fallback_key_url" | gpg --dearmor -o "$keyring" --yes || return 1
 				fi
 				chmod 644 "$keyring"
@@ -5943,7 +5943,7 @@ clamav_scan() {
 		return
 	fi
 
-	echo -e "${gl_kjlan}正在扫描目录$@... ${gl_bai}"
+	echo -e "${gl_kjlan}正在掃描目錄$@...${gl_bai}"
 
 	# 建構 mount 參數
 	local MOUNT_PARAMS=""
@@ -6168,7 +6168,7 @@ net.ipv4.udp_wmem_min = 16384
 net.ipv4.tcp_notsent_lowat = 16384"
 	fi
 
-	# ── 游戏服场景额外：低延迟优先 ──
+	# ── 遊戲服場景額外：低延遲優先 ──
 	local GAME_EXTRA=""
 	if [ "$scene" = "game" ]; then
 		GAME_EXTRA="
@@ -6203,7 +6203,7 @@ net.ipv4.tcp_slow_start_after_idle = 0"
 	# ── 寫入設定檔（持久化） ──
 	echo -e "${gl_lv}寫入優化配置...${gl_bai}"
 	cat > "$CONF" << SYSCTL
-# kejilion 内核调优配置
+# kejilion 核心調優配置
 # 模式: $mode_name | 場景: $scene
 # 記憶體: ${MEM_MB}MB | 產生時間: $(date '+%Y-%m-%d %H:%M:%S')
 
@@ -6300,9 +6300,9 @@ SYSCTL
 			skipped=$((skipped + 1))
 		fi
 	done < "$CONF"
-	echo -e "${gl_lv}已应用 ${applied}項參數${skipped:+，跳過${skipped}項不支援的參數}${gl_bai}"
+	echo -e "${gl_lv}已應用${applied}項參數${skipped:+，跳過${skipped}項不支援的參數}${gl_bai}"
 
-	# ── 透明大页面 ──
+	# ── 透明大頁面 ──
 	if [ -f /sys/kernel/mm/transparent_hugepage/enabled ]; then
 		echo "$THP" > /sys/kernel/mm/transparent_hugepage/enabled 2>/dev/null
 	fi
@@ -6719,7 +6719,7 @@ create_backup() {
 		IFS=' ' read -r -a BACKUP_PATHS <<< "$input"
 	fi
 
-	# 產生備份檔案前綴
+	# 生成备份文件前缀
 	local PREFIX=""
 	for path in "${BACKUP_PATHS[@]}"; do
 		# 提取目錄名稱並去除斜杠
@@ -6734,7 +6734,7 @@ create_backup() {
 	local BACKUP_NAME="${PREFIX}_$TIMESTAMP.tar.gz"
 
 	# 列印使用者選擇的目錄
-	echo "您选择的备份目录为："
+	echo "您選擇的備份目錄為："
 	for path in "${BACKUP_PATHS[@]}"; do
 		echo "- $path"
 	done
@@ -6771,7 +6771,7 @@ restore_backup() {
 	if [ $? -eq 0 ]; then
 		echo "備份恢復成功！"
 	else
-		echo "备份恢复失败！"
+		echo "備份恢復失敗！"
 		exit 1
 	fi
 }
@@ -6911,7 +6911,7 @@ kj_ssh_parse_remote() {
 	fi
 
 	if ! kj_ssh_validate_user "$remote_user"; then
-		echo "错误: SSH 用户名格式不正确。"
+		echo "錯誤: SSH 使用者名稱格式不正確。"
 		return 1
 	fi
 
@@ -7041,7 +7041,7 @@ delete_connection() {
 
 	IFS='|' read -r name ip user port password_or_key <<< "$connection"
 
-	# 如果连接使用的是密钥文件，则删除该密钥文件
+	# 如果連接使用的是密鑰文件，則刪除該密鑰文件
 	if [[ "$password_or_key" == "$KEY_DIR"* ]]; then
 		rm -f "$password_or_key"
 	fi
@@ -7076,7 +7076,7 @@ use_connection() {
 	else
 		# 使用密碼連接
 		if ! command -v sshpass &> /dev/null; then
-			echo "錯誤：未安裝 sshpass，請先安裝 sshpass。"
+			echo "错误：未安装 sshpass，请先安装 sshpass。"
 			echo "安裝方法："
 			echo "  - Ubuntu/Debian: apt install sshpass"
 			echo "  - CentOS/RHEL: yum install sshpass"
@@ -7314,7 +7314,7 @@ disk_manager() {
 		list_partitions
 		echo "------------------------"
 		echo "1. 掛載分割區 2. 卸載分割區 3. 檢視已掛載分割區"
-		echo "4. 格式化分区      5. 检查分区状态"
+		echo "4. 格式化分割區 5. 檢查分割區狀態"
 		echo "------------------------"
 		echo "0. 返回上一級選單"
 		echo "------------------------"
@@ -7446,7 +7446,7 @@ run_task() {
 
 	# 根據同步方向調整來源和目標路徑
 	if [[ "$direction" == "pull" ]]; then
-		echo "正在拉取同步到本地: $remote:$local_path -> $remote_path"
+		echo "正在拉取同步到本地:$remote:$local_path -> $remote_path"
 		source="$remote:$local_path"
 		destination="$remote_path"
 	else
@@ -7570,7 +7570,7 @@ rsync_manager() {
 		view_tasks
 		echo
 		echo "1. 建立新任務 2. 刪除任務"
-		echo "3. 执行本地同步到远端         4. 执行远端同步到本地"
+		echo "3. 執行本地同步到遠端 4. 執行遠端同步到本地"
 		echo "5. 建立定時任務 6. 刪除定時任務"
 		echo "---------------------------------"
 		echo "0. 返回上一級選單"
@@ -8708,6 +8708,7 @@ linux_test() {
 	  echo -e "${gl_kjlan}16.  ${gl_bai}ludashi2020 三線線路測試"
 	  echo -e "${gl_kjlan}17.  ${gl_bai}i-abc 多功能測速腳本"
 	  echo -e "${gl_kjlan}18.  ${gl_bai}NetQuality 網路品質體檢腳本${gl_huang}★${gl_bai}"
+	  echo -e "${gl_kjlan}19.  ${gl_bai}TcpQuality TCP重傳偵測腳本${gl_huang}★${gl_bai}"
 
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}硬體效能測試"
@@ -8813,6 +8814,12 @@ linux_test() {
 			  clear
 			  send_stats "網路品質測試腳本"
 			  bash <(curl -sL Net.Check.Place)
+			  ;;
+
+		  19)
+			  clear
+			  send_stats "TcpQuality TCP重傳偵測腳本"
+			  bash <(curl -sL https://raw.githubusercontent.com/ibsgss/TcpQuality/main/runTcpQuality.sh)
 			  ;;
 
 		  21)
@@ -9390,7 +9397,7 @@ linux_ldnmp() {
 
 	  clear
 	  ldnmp_web_on
-	  echo "数据库前缀: typecho_"
+	  echo "資料庫前綴: typecho_"
 	  echo "資料庫位址: mysql"
 	  echo "使用者名稱:$dbuse"
 	  echo "密碼:$dbusepasswd"
@@ -10247,7 +10254,7 @@ work = copy.deepcopy(obj)
 models_cfg = work.setdefault('models', {})
 providers = models_cfg.get('providers', {})
 if not isinstance(providers, dict) or not providers:
-    print('ℹ️ 未检测到 API providers，跳过模型同步')
+    print('ℹ️ 未偵測到 API providers，跳過模型同步')
     raise SystemExit(0)
 
 agents = work.setdefault('agents', {})
@@ -10350,11 +10357,11 @@ def rebind_defaults_before_delete(name):
         if ref_provider(val) == name:
             repl = get_replacement()
             if not repl:
-                summary.append(f'❌ {name}: {fk} 指向该 provider，但无可用替代模型，已中止删除')
+                summary.append(f'❌ {name}: {fk} 指向該 provider，但無可用替代模型，已中止刪除')
                 return False
             defaults[fk] = repl
             changed = True
-            summary.append(f'🔁 删除前已切换 {fk}: {val} -> {repl}')
+            summary.append(f'🔁 刪除前已切換 {fk}: {val} -> {repl}')
 
     return True
 
@@ -10416,14 +10423,14 @@ for name, provider in list(providers.items()):
         continue
 
     if api not in SUPPORTED_APIS:
-        summary.append(f'🔁 {name}: 发现非法协议 {api or "(unset)"}，将重新探测')
+        summary.append(f'🔁 {name}: 發現非法協定 {api or "(unset)"}，將重新探測')
         provider['api'] = ''
         api = ''
         changed = True
 
     data, err, attempts = fetch_remote_models_with_retry(name, base_url, api_key, retries=3)
     if err is not None:
-        summary.append(f'⚠️ {name}: /models 探测失败，已重试 {attempts} 次 ({type(err).__name__}: {err})')
+        summary.append(f'⚠️ {name}: /models 偵測失敗，已重試 {attempts} 次 ({type(err).__name__}: {err})')
         send_stat('OpenClaw API確認介入')
         if prompt_delete_provider(name):
             deleted = delete_provider_and_refs(name)
@@ -10539,7 +10546,7 @@ if changed:
         f.write('\n')
     for line in summary:
         print(line)
-    print('✅ OpenClaw API 模型一致性同步完成并已写入配置')
+    print('✅ OpenClaw API 模型一致性同步完成並已寫入配置')
 else:
     for line in summary:
         print(line)
@@ -10602,7 +10609,7 @@ PY
 
 
 	# OpenClaw API 協定偵測邏輯已移除：不再自動偵測/判定 API 類型。
-	# 说明：API 类型由用户显式配置（models.providers.<name>.api），脚本不再尝试调用 /responses 做推断。
+	# 說明：API 類型由使用者明確配置（models.providers.<name>.api），腳本不再嘗試呼叫 /responses 做推論。
 
 	# 建構模型配置 JSON
 	build-openclaw-provider-models-json() {
@@ -10757,7 +10764,7 @@ EOF
 		local default_model="$4"
 
 		if [[ -z "$default_model" ]]; then
-			echo "❌ 默认模型不能为空"
+			echo "❌ 預設模型不能為空"
 			return 1
 		fi
 
@@ -11223,20 +11230,20 @@ PY2
 	local rc=$?
 	case "$rc" in
 		0)
-			echo "✅ 同步执行完成"
+			echo "✅ 同步執行完成"
 			start_gateway
 			;;
 		2)
 			echo "❌ 同步失敗：provider 不存在或未配置"
 			;;
 		3)
-			echo "❌ 同步失败：provider 配置不完整或类型不支持"
+			echo "❌ 同步失敗：provider 配置不完整或類型不支持"
 			;;
 		4)
 			echo "❌ 同步失敗：上游 /models 請求失敗"
 			;;
 		5)
-			echo "❌ 同步失败：上游模型为空或同步后无可用模型"
+			echo "❌ 同步失敗：上游模型為空或同步後無可用模型"
 			;;
 		*)
 			echo "❌ 同步失敗：請檢查設定檔結構或日誌輸出"
@@ -11249,7 +11256,7 @@ PY2
 openclaw_detect_api_protocol_by_provider() {
 	# 協定探測邏輯已移除：腳本不再自動偵測/判定 API 類型。
 	# 保留函數以相容選單調用，但不做任何改寫。
-	echo "ℹ️ 已关闭协议探测：请手动在 ${HOME}/.openclaw/openclaw.json 中設定 provider.api 為 openai-completions 或 openai-responses"
+	echo "ℹ️ 已關閉協議探測：請手動在${HOME}/.openclaw/openclaw.json 中設定 provider.api 為 openai-completions 或 openai-responses"
 	return 0
 }
 
@@ -11270,7 +11277,7 @@ fix-openclaw-provider-protocol-interactive() {
 		return 1
 	fi
 
-	echo "请选择要设置的 API 类型："
+	echo "請選擇要設定的 API 類型："
 	echo "1. openai-completions"
 	echo "2. openai-responses"
 	read -erp "請輸入你的選擇 (1/2):" proto_choice
@@ -11280,7 +11287,7 @@ fix-openclaw-provider-protocol-interactive() {
 		1) new_api="openai-completions" ;;
 		2) new_api="openai-responses" ;;
 		*)
-			echo "❌ 无效选择"
+			echo "❌ 無效選擇"
 			break_end
 			return 1
 			;;
@@ -11325,7 +11332,7 @@ PY
 			start_gateway
 			;;
 		2)
-			echo "❌ 切换失败：provider 不存在或未配置"
+			echo "❌ 切換失敗：provider 不存在或未配置"
 			;;
 		3)
 			echo "❌ 切換失敗：協定值非法"
@@ -12287,7 +12294,7 @@ PYTHON_EOF
 						failed_list="$failed_list $plugin_id"
 					fi
 				else
-					echo "🗑️ 正在删除/禁用插件: $plugin_id"
+					echo "🗑️ 正在刪除/停用插件:$plugin_id"
 					openclaw plugins disable "$plugin_id" >/dev/null 2>&1
 					if openclaw plugins uninstall "$plugin_id"; then
 						echo "✅ 已卸載:$plugin_id"
@@ -12690,7 +12697,7 @@ openclaw_json_get_bool() {
 					break_end
 					;;
 				3)
-					read -e -p "請輸入WhatsApp收到的連接碼 (例如 NYA99R2F)（輸入 0 退出）：" code
+					read -e -p "請輸入WhatsApp收到的連線碼 (例如 NYA99R2F)（輸入 0 退出）：" code
 					if [ "$code" = "0" ]; then continue; fi
 					if [ -z "$code" ]; then echo "錯誤：連接碼不能為空。"; sleep 1; continue; fi
 					openclaw pairing approve whatsapp "$code"
@@ -13574,7 +13581,7 @@ PY
 		fi
 		case "$model_status" in
 			ok) OPENCLAW_MEMORY_RECOMMEND_REASON+=("本地模型檔案存在") ;;
-			hf) OPENCLAW_MEMORY_RECOMMEND_REASON+=("模型来自 HF 下载源（国内可能慢/失败）") ;;
+			hf) OPENCLAW_MEMORY_RECOMMEND_REASON+=("模型來自 HF 下載來源（國內可能慢/失敗）") ;;
 			*) OPENCLAW_MEMORY_RECOMMEND_REASON+=("本地模型檔案不存在或不可用") ;;
 		esac
 		if [ "$hf_ok" = "ok" ]; then
@@ -13891,7 +13898,7 @@ EOF
 				if [ -f "$model_dest" ]; then
 					echo "✅ 已發現預設模型檔:$model_dest"
 				else
-					echo "⬇️ 下载模型: $model_url"
+					echo "⬇️ 下載模型:$model_url"
 					openclaw_memory_download_file "$model_url" "$model_dest" || return 1
 					echo "✅ 模型已下載:$model_dest"
 				fi
@@ -13973,7 +13980,7 @@ EOF
 		while true; do
 			clear
 			echo "======================================="
-			echo "记忆方案自动部署"
+			echo "記憶方案自動部署"
 			echo "======================================="
 			echo "1. QMD"
 			echo "2. Local"
@@ -14292,7 +14299,7 @@ EOF
 			echo "2. 檢視記憶文件"
 			echo "3. 索引修復（Indexed 異常）"
 			echo "4. 記憶方案（QMD/Local/Auto）"
-			echo "5. 搜索测试（验证索引是否工作）"
+			echo "5. 搜尋測試（驗證索引是否運作）"
 			echo "6. 深度狀態探測（檢查嵌入模型）"
 			echo "0. 返回上一級"
 			echo "---------------------------------------"
@@ -14839,7 +14846,7 @@ except Exception as e:
 					break_end
 					;;
 				2)
-					echo "准备应用：开发增强模式"
+					echo "準備應用：開發增強模式"
 					read -e -p "輸入 yes 確認:" confirm
 					if [ "$confirm" = "yes" ]; then openclaw_permission_apply_developer; else echo "已取消"; fi
 					break_end
@@ -17101,7 +17108,7 @@ while true; do
 			ip_address
 			echo "已經安裝完成"
 			check_docker_app_ip
-			echo "初始使用者名稱密碼皆為: admin"
+			echo "初始使用者名稱密碼均為: admin"
 		}
 
 		docker_app_update() {
@@ -20953,7 +20960,7 @@ EOF
 			  echo "TG-bot監控預警功能"
 			  echo "影片介紹: https://youtu.be/vLL-eb3Z_TY"
 			  echo "------------------------------------------------"
-			  echo "您需要設定tg機器人API和接收預警的使用者ID，即可實現本機CPU，內存，硬碟，流量，SSH登入的即時監控預警"
+			  echo "您需要設定tg機器人API和接收預警的用戶ID，即可實現本機CPU，內存，硬碟，流量，SSH登入的即時監控預警"
 			  echo "到達閾值後會向用戶發送預警訊息"
 			  echo -e "${gl_hui}-關於流量，重啟伺服器將重新計算-${gl_bai}"
 			  read -e -p "確定繼續嗎？ (Y/N):" choice
@@ -21112,7 +21119,7 @@ EOF
 			  echo -e "7. 開啟${gl_huang}BBR${gl_bai}加速"
 			  echo -e "8. 設定時區到${gl_huang}上海${gl_bai}"
 			  echo -e "9. 自動優化DNS位址${gl_huang}海外: 1.1.1.1 8.8.8.8 國內: 223.5.5.5${gl_bai}"
-		  	  echo -e "10. 设置网络为${gl_huang}ipv4優先${gl_bai}"
+		  	  echo -e "10. 設定網路為${gl_huang}ipv4優先${gl_bai}"
 			  echo -e "11. 安裝基礎工具${gl_huang}docker wget sudo tar unzip socat btop nano vim${gl_bai}"
 			  echo -e "12. Linux系統核心參數優化${gl_huang}自動根據網路環境調優${gl_bai}"
 			  echo "------------------------------------------------"
@@ -21304,7 +21311,7 @@ linux_file() {
 		echo "1. 進入目錄 2. 建立目錄 3. 修改目錄權限 4. 重新命名目錄"
 		echo "5. 刪除目錄 6. 返回上一層選單目錄"
 		echo "------------------------"
-		echo "11. 建立檔案 12. 編輯檔案 13. 修改檔案權限 14. 重新命名文件"
+		echo "11. 建立文件 12. 編輯文件 13. 修改文件權限 14. 重新命名文件"
 		echo "15. 刪除文件"
 		echo "------------------------"
 		echo "21. 壓縮檔案目錄 22. 解壓縮檔案目錄 23. 行動檔案目錄 24. 複製檔案目錄"
@@ -21335,7 +21342,7 @@ linux_file() {
 				read -e -p "請輸入目前目錄名稱:" current_name
 				read -e -p "請輸入新目錄名稱:" new_name
 				mv "$current_name" "$new_name" && echo "目錄已重新命名" || echo "重新命名失敗"
-				send_stats "重命名目录"
+				send_stats "重新命名目錄"
 				;;
 			5)  # 删除目录
 				read -e -p "請輸入要刪除的目錄名稱:" dirname
@@ -21643,7 +21650,7 @@ echo ""
 echo -e "伺服器優惠"
 echo "------------------------"
 echo -e "${gl_lan}萊卡雲 香港CN2 GIA 韓國雙ISP 美國CN2 GIA 優惠活動${gl_bai}"
-echo -e "${gl_bai}网址: https://www.lcayun.com/aff/ZEXUQBIM${gl_bai}"
+echo -e "${gl_bai}網址: https://www.lcayun.com/aff/ZEXUQBIM${gl_bai}"
 echo "------------------------"
 echo -e "${gl_lan}RackNerd 10.99刀每年 美國 1核心 1G記憶體 20G硬碟 1T流量每月${gl_bai}"
 echo -e "${gl_bai}網址: https://my.racknerd.com/aff.php?aff=5501&pid=879${gl_bai}"
@@ -21955,34 +21962,34 @@ echo "bbr3控制面板 k bbr3 | k bbrv3"
 echo "核心調優面板 k nhyh | k 核心最佳化"
 echo "設定虛擬記憶體 k swap 2048"
 echo "設定虛擬時區 k time Asia/Shanghai | k 時區 Asia/Shanghai"
-echo "系統回收站 k trash | k hsz | k 回收站"
+echo "系统回收站          k trash | k hsz | k 回收站"
 echo "系統備份功能 k backup | k bf | k 備份"
 echo "ssh遠端連線工具 k ssh | k 遠端連線"
 echo "rsync遠端同步工具 k rsync | k 遠端同步"
-echo "硬碟管理工具 k disk | k 硬碟管理"
+echo "硬盘管理工具        k disk | k 硬盘管理"
 echo "內網穿透（服務端） k frps"
 echo "內網穿透（客戶端） k frpc"
 echo "軟體啟動 k start sshd | k 啟動 sshd"
-echo "軟體停止 k stop sshd | k 停止 sshd"
+echo "软件停止            k stop sshd | k 停止 sshd "
 echo "軟體重啟 k restart sshd | k 重啟 sshd"
 echo "軟體狀態檢視 k status sshd | k 狀態 sshd"
 echo "軟體開機啟動 k enable docker | k autostart docke | k 開機啟動 docker"
 echo "網域憑證申請 k ssl"
-echo "網域名稱憑證到期查詢 k ssl ps"
+echo "域名证书到期查询    k ssl ps"
 echo "docker管理平面 k docker"
 echo "docker環境安裝 k docker install |k docker 安裝"
-echo "docker容器管理 k docker ps |k docker 容器"
-echo "docker映像管理 k docker img |k docker 映像"
-echo "LDNMP站台管理 k web"
-echo "LDNMP快取清理 k web cache"
+echo "docker容器管理      k docker ps |k docker 容器"
+echo "docker镜像管理      k docker img |k docker 镜像"
+echo "LDNMP站点管理       k web"
+echo "LDNMP缓存清理       k web cache"
 echo "安裝WordPress k wp |k wordpress |k wp xxx.com"
 echo "安裝反向代理 k fd |k rp |k 反代 |k fd xxx.com"
 echo "安裝負載平衡 k loadbalance |k 負載平衡"
 echo "安裝L4負載平衡 k stream |k L4負載平衡"
 echo "防火牆面板 k fhq |k 防火牆"
-echo "開放埠 k dkdk 8080 |k 開啟連接埠 8080"
+echo "开放端口            k dkdk 8080 |k 打开端口 8080"
 echo "關閉連接埠 k gbdk 7800 |k 關閉連接埠 7800"
-echo "放行IP              k fxip 127.0.0.0/8 |k 放行IP 127.0.0.0/8"
+echo "放行IP k fxip 127.0.0.0/8 |k 放行IP 127.0.0.0/8"
 echo "阻止IP k zzip 177.5.25.36 |k 阻止IP 177.5.25.36"
 echo "命令收藏 k fav | k 指令收藏夾"
 echo "應用市場管理 k app"
@@ -22157,18 +22164,18 @@ else
 
 		enable|autostart|开机启动)
 			shift
-			send_stats "軟體開機自啟"
+			send_stats "软件开机自启"
 			enable "$@"
 			;;
 
 		ssl)
 			shift
 			if [ "$1" = "ps" ]; then
-				send_stats "查看證書狀態"
+				send_stats "查看证书状态"
 				ssl_ps
 			elif [ -z "$1" ]; then
 				add_ssl
-				send_stats "快速申請證書"
+				send_stats "快速申请证书"
 			elif [ -n "$1" ]; then
 				add_ssl "$1"
 				send_stats "快速申請證書"
